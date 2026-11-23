@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Offline Notes</string>
+    <string name="search_hint">Search notes (title &amp; content)…</string>
+    <string name="create_note">Create Note</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="title_hint">Title</string>
+    <string name="content_hint">Start typing your note…</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_confirm_title">Delete this note?</string>
+    <string name="delete_confirm_message">This note will be permanently removed. You can undo immediately after deleting.</string>
+    <string name="empty_notes_title">No notes yet</string>
+    <string name="empty_notes_subtitle">Capture thoughts, ideas, or reminders that stay on your device offline.</string>
+    <string name="no_search_results_title">No matching notes</string>
+    <string name="no_search_results_subtitle">Try searching with a different title or keyword.</string>
+    <string name="sort_by_updated">Last Updated</string>
+    <string name="sort_by_title">Title (A-Z)</string>
+    <string name="validation_blank_note">Cannot save an empty note. Please add a title or content.</string>
+    <string name="note_saved">Note saved successfully</string>
+    <string name="note_deleted">Note deleted</string>
+    <string name="undo">Undo</string>
+    <string name="untitled_note">Untitled note</string>
+</resources>
