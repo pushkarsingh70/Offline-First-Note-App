@@ -174,6 +174,42 @@ All 17 acceptance and unit tests executed and passed:
 
 ---
 
+## ⚠️ Known Limitations & Future Enhancements
+
+While the application meets and exceeds all requirements of an offline-first architecture, the following design boundaries and intentional trade-offs are noted:
+
+1. **Local-Only Device Storage (No Cloud Synchronization)**:
+   * **Scope**: All data resides strictly inside the sandboxed Room SQLite database on the local device.
+   * **Limitation**: Notes do not sync across multiple devices, and there is no automatic remote cloud backup (e.g., Firebase, Google Drive, or WebDAV).
+   * **Future Roadmap**: Implement an optional sync engine using WorkManager and Conflict-Free Replicated Data Types (CRDTs) or timestamp-based vector clocks.
+
+2. **Plaintext Note Content (No Rich Text / Markdown Rendering)**:
+   * **Scope**: Titles and note bodies are stored and edited as plain strings (`String`).
+   * **Limitation**: In-editor formatting (bold, italics, lists, clickable hyperlinks, markdown syntax preview) is not currently supported.
+   * **Future Roadmap**: Integrate Jetpack Compose `AnnotatedString` or a Markdown rendering engine.
+
+3. **No Media or File Attachments**:
+   * **Scope**: Restricted to text notes with pastel color tagging and pinning.
+   * **Limitation**: Image attachments, audio voice memos, sketches, or PDF file embeds cannot be attached to a note.
+   * **Future Roadmap**: Add external storage / scoped storage URI references in the SQLite schema with thumbnail caching.
+
+4. **Single-Level Undo (Transient Snackbar Cache)**:
+   * **Scope**: Note deletion supports immediate undo via an interactive Material 3 Snackbar.
+   * **Limitation**: Once the Snackbar dismisses or a subsequent delete action is triggered, deleted notes cannot be restored (no permanent "Trash / Recycle Bin" retention period).
+   * **Future Roadmap**: Transition from immediate permanent delete (`DELETE FROM notes`) to a soft-delete mechanism (`isDeleted = true`) with a 30-day Trash folder.
+
+5. **In-Memory Query Filter vs. Full-Text Search (FTS)**:
+   * **Scope**: Search relies on SQLite `LIKE '%...%'` queries with case-normalization.
+   * **Limitation**: While efficient and instantaneous for personal note collections (thousands of notes), SQLite `LIKE` queries perform table scans rather than index-accelerated token lookups, lacking word-stemming or typo tolerance.
+   * **Future Roadmap**: Implement Room SQLite FTS4/FTS5 virtual tables for tokenized search and relevance scoring.
+
+6. **Export & Import Capabilities**:
+   * **Scope**: Backups survive app updates, restarts, and process death on the current device.
+   * **Limitation**: There is currently no built-in "Export to JSON / TXT / CSV" or "Import backup" feature for cross-app migration.
+   * **Future Roadmap**: Implement Android Storage Access Framework (SAF) export and import utilities.
+
+---
+
 ## 📦 Deliverable: APK Location
 
 * **Debug APK Path**:
